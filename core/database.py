@@ -1,8 +1,10 @@
-from sqlalchemy.ext.declarative import declarative_base
+from enum import Enum
 
-Base = declarative_base
+from sqlalchemy.orm import declarative_base
+
+Base = declarative_base()
 
 
-class Location(enum.Enum):
-    Cairo = "Cairo"
-    Alexandria = "Alexandria"
+class Location(Enum):
+    CAIRO = "Cairo"
+    ALEXANDRIA = "Alexandria"

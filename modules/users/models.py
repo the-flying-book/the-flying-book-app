@@ -11,6 +11,5 @@ class User(Base):
     name = Column(String)
     email = Column(String, unique=True)
     password = Column(String)
-    Location = Column(Enum(Location))
-
+    location = Column(Enum(Location), nullable=True)
     books = relationship("Book", back_populates="owner")

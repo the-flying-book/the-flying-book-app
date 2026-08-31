@@ -7,11 +7,11 @@ from sqlalchemy.orm import relationship
 from core.database import Base, Location
 
 
-class bookCondition(Enum):
-    new = "New"
-    good = "Good"
-    fair = "Fair"
-    poor = "Poor"
+class BookCondition(Enum):
+    NEW = "New"
+    GOOD = "Good"
+    FAIR = "Fair"
+    POOR = "Poor"
 
 
 class Book(Base):
@@ -20,7 +20,7 @@ class Book(Base):
     id = Column(Integer, primary_key=True)
     title = Column(String)
     author = Column(String)
-    condition = Column(bookCondition)
+    condition = Column(Enum(BookCondition), nullable=False)
     owner_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     location = Column(Location)
 
