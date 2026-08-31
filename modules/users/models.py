@@ -1,7 +1,7 @@
-from sqlalchemy import Column, Enum, Integer, String
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
 
-from core.database import Base, Location
+from core.database import Base
 
 
 class User(Base):
@@ -10,6 +10,16 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String)
     email = Column(String, unique=True)
-    password = Column(String)
-    location = Column(Enum(Location), nullable=True)
-    books = relationship("Book", back_populates="owner")
+    hashed_password = Column(String)
+
+    books = relationship("Book", back_populates="owner", foreign_keys="Book.owner_id")
+    interested_books = relationship(
+        "Interest",
+        back_populates="interested_user",
+        foreign_keys="Interest.interested_user_id",
+    )
+    proposals_made = relationship(
+        "Proposal",
+        back_populates="proposed_by",
+        foreign_keys="Proposal.proposed_by_user_id",
+    )
